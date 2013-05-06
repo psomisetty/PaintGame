@@ -6,15 +6,16 @@ class Paint extends Circle{
     super(x,y,30,30,_c); // Passes location, size, and color to super class
     velocity = new PVector(cos(radians(r)),sin(radians(r))); // Initializes unit vector of velocity in direction of rotation
     velocity.normalize(); // Ensures vector is unit vector
-    velocity.mult(10); // Sets magnitude of vector to 10
+    velocity.mult(15); // Sets magnitude of vector to 15
     mass = _mass; // Sets mass (for future force field applications)
   }
 
   void run(ArrayList<Wall> Walls, PVector gravity, PVector Force){
-    ArrayList collides = collides_wall(Walls);
-    if ((Boolean) collides.get(0) == true){ // If collides is true
+    ArrayList collides = collides_wall(Walls); // Get the ArrayList of Values
+    boolean colliding = (Boolean) collides.get(0); // Get the Boolean Value
+    if (colliding){ // If collides is true
       render_splatter((Wall)collides.get(1),(Float) collides.get(2)); // Renders "paint splatter" when paint hits wall or floor using Wall object and float position
-    } else if ((Boolean) collides.get(0) == false) { // No collision exists
+    } else { // No collision exists
       super.render(); // Renders ordinary paint
       applyAccel(gravity); // Accelerates paint's velocity
       applyForce(Force); // Applies force to object (if available)
@@ -28,8 +29,8 @@ class Paint extends Circle{
    ArrayList result = new ArrayList(); // creates empty array list
    boolean b = false; // initializes failure
    for (Wall w: Walls){
-      if (w instanceof SideWall){
-        if ((location.x + 15 > w.ls && location.x - 15 > w.rs) || (location.x + 15 < w.ls && location.x - 15 < w.rs)){ // Creates an XOR boolean comparison. makes sure paint is beyond bounds.
+      /*if (w instanceof SideWall){
+        if ((w.ls < location.x) && (location.x < w.rs)){ // Creates an XOR boolean comparison. makes sure paint is in a sidewall.
           b = true; // Collision is true
           result.add(b); // Add boolean
           result.add(w); // Add wall object
@@ -37,8 +38,10 @@ class Paint extends Circle{
         } else {
           result.add(b); // Collision is false
         }
-      } else if (w instanceof FloorWall){
-        if (location.y > w.tp){
+      } else */
+      // Above Text is for collision with SideWalls (Does not work)
+      if (w instanceof FloorWall){
+        if (location.y >= w.tp){
           b = true; // Collision is true
           result.add(b); // Add boolean
           result.add(w); // Add wall object
@@ -54,19 +57,21 @@ class Paint extends Circle{
   }
   
   void render_splatter(Wall w, float loc){
-    if ( w instanceof SideWall ){
+    /*if ( w instanceof SideWall ){
       location.x = loc;
       pushMatrix();
         translate(location.x,location.y);
         fill(c);
         rect(0,0,w.wid, 30 + abs(velocity.y));
       popMatrix();
-    } else if ( w instanceof FloorWall ) {
+    } else */
+    //Above text is for paint splatter on side wall
+    if ( w instanceof FloorWall ) {
       location.y = loc;
       pushMatrix();
         translate(location.x,location.y);
         fill(c);
-        rect(location.x-15 , 0, 30, w.het);
+        rect(-15 , 0, 30, w.het);
       popMatrix();
     }
   }
