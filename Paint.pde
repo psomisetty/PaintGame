@@ -28,45 +28,40 @@ class Paint extends Circle{
   ArrayList collides_wall(ArrayList<Wall> Walls){
    ArrayList result = new ArrayList(); // creates empty array list
    boolean b = false; // initializes failure
+   Wall wall = null;
+   float loc = 0;
    for (Wall w: Walls){
-      /*if (w instanceof SideWall){
-        if ((w.ls < location.x) && (location.x < w.rs)){ // Creates an XOR boolean comparison. makes sure paint is in a sidewall.
+      if (w instanceof SideWall){
+        if ((w.ls <= location.x) && (location.x <= w.rs)){
           b = true; // Collision is true
-          result.add(b); // Add boolean
-          result.add(w); // Add wall object
-          result.add(w.location.x); // Add wall's x position
-        } else {
-          result.add(b); // Collision is false
+          wall = w; // Add wall
+          loc = w.location.x; // Add wall's x position
+          break;
         }
-      } else */
-      // Above Text is for collision with SideWalls (Does not work)
-      if (w instanceof FloorWall){
+      } else if (w instanceof FloorWall){
         if (location.y >= w.tp){
           b = true; // Collision is true
-          result.add(b); // Add boolean
-          result.add(w); // Add wall object
-          result.add(w.location.y); // Add wall's y postion
-        } else {
-          result.add(b); // Collision is false
+          wall = w; // Add wall
+          loc = w.location.y; // Add wall's y position
+          break;
         }
-      } else {
-        result.add(b); // Compared object is not a Wall
       }
     }
-   return result;
+  result.add(b);
+  result.add(wall);
+  result.add(loc);
+  return result;
   }
   
   void render_splatter(Wall w, float loc){
-    /*if ( w instanceof SideWall ){
+    if ( w instanceof SideWall ){
       location.x = loc;
       pushMatrix();
         translate(location.x,location.y);
         fill(c);
         rect(0,0,w.wid, 30 + abs(velocity.y));
       popMatrix();
-    } else */
-    //Above text is for paint splatter on side wall
-    if ( w instanceof FloorWall ) {
+    } else if ( w instanceof FloorWall ) {
       location.y = loc;
       pushMatrix();
         translate(location.x,location.y);

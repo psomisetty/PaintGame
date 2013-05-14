@@ -59,9 +59,6 @@ class Player{
             //Incrememnts angle of trajectory line by 1
             angle += 1;
           }
-        } else if (keyCode == SHIFT) {
-          //Creates a new Paint object at the location of about the middle of the player object of random color and mass of 1
-          paintblobs.add(new Paint(location.x, location.y - 50, color(int(random(255)),int(random(255)),int(random(255))), angle, 1));
         }
       }
     }

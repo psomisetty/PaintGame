@@ -20,3 +20,11 @@ void draw(){
   }
   p.run(walls,gravity,new PVector(0,0)); // Draw Character and all paint objects
 }
+
+void keyReleased(){
+  if (key == CODED){
+    if (keyCode == SHIFT){
+      p.paintblobs.add(new Paint(p.location.x, p.location.y - 50, color(int(random(255)),int(random(255)),int(random(255))), p.angle, 1));
+    }
+  }
+}
