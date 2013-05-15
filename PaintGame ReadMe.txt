@@ -6,7 +6,7 @@ The TITLE of my project is Painter
 The TOPIC of my project is Paint-Throwing
 
 My main point in my project is to show that throwing paint is not really
-	all that fun.
+	all that fun. But it can be, with MUSIC!
 
 If this project could change the world, it would teach people that proper
 	painting with brushes and whatnot is much more rewarding than
@@ -19,3 +19,5 @@ Things that are not yet complete in my project: Also I want to try to allow colo
 	Also, I want to add in the ability to hold down shift for having a
 	varying velocity depending on how long shift is held for.
 
+Credits:
+Music File "IncompatibleType" Composed and Created by Greg Mcleod of McLeodGaming Inc.
