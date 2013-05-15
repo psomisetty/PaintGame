@@ -9,6 +9,14 @@ class Paint extends Circle{
     velocity.mult(15); // Sets magnitude of vector to 15
     mass = _mass; // Sets mass (for future force field applications)
   }
+  
+  Paint(float x, float y, color _c, float r, float _mass, float v_mult){
+    super(x,y,30,30,_c); // Passes location, size, and color to super class
+    velocity = new PVector(cos(radians(r)),sin(radians(r))); // Initializes unit vector of velocity in direction of rotation
+    velocity.normalize(); // Ensures vector is unit vector
+    velocity.mult(v_mult); // Sets magnitude of vector to v_mult
+    mass = _mass; // Sets mass (for future force field applications)
+  }
 
   void run(ArrayList<Wall> Walls, PVector gravity, PVector Force){
     ArrayList collides = collides_wall(Walls); // Get the ArrayList of Values
@@ -28,8 +36,8 @@ class Paint extends Circle{
   ArrayList collides_wall(ArrayList<Wall> Walls){
    ArrayList result = new ArrayList(); // creates empty array list
    boolean b = false; // initializes failure
-   Wall wall = null;
-   float loc = 0;
+   Wall wall = null; // initializes null pointer
+   float loc = 0; // initializes at 0
    for (Wall w: Walls){
       if (w instanceof SideWall){
         if ((w.ls <= location.x) && (location.x <= w.rs)){
@@ -45,6 +53,13 @@ class Paint extends Circle{
           loc = w.location.y; // Add wall's y position
           break;
         }
+      } else if (w instanceof CeilingWall){
+        if (location.y <= w.bt){
+          b = true; // Collision is true
+          wall = w; // Add wall
+          loc = w.location.y; // Add wall's y position
+          break;
+        }
       }
     }
   result.add(b);
@@ -54,6 +69,7 @@ class Paint extends Circle{
   }
   
   void render_splatter(Wall w, float loc){
+    // Creates Rectangle "Splatters" on wall
     if ( w instanceof SideWall ){
       location.x = loc;
       pushMatrix();
@@ -66,7 +82,14 @@ class Paint extends Circle{
       pushMatrix();
         translate(location.x,location.y);
         fill(c);
-        rect(-15 , 0, 30, w.het);
+        rect(-15, 0, 30, w.het);
+      popMatrix();
+    } else if ( w instanceof CeilingWall){
+      location.y = loc;
+      pushMatrix();
+        translate(location.x,location.y);
+        fill(c);
+        rect(-15, 0, 30, w.het);
       popMatrix();
     }
   }
