@@ -6,6 +6,7 @@ Player p;
 ArrayList<Wall> walls;
 PVector gravity;
 float v_mult;
+PImage bg;
 
 void setup(){
   size(600,600);
@@ -17,6 +18,8 @@ void setup(){
   walls.add(new SideWall(0, 0, 30, height, 0, color(255))); // Create Left Wall
   walls.add(new SideWall(width-30, 0 , 30, height, 0, color(255))); // Create Right Wall
   gravity = new PVector(0,.5); // Set acceleration due to gravity
+  bg = loadImage("PaparazziBackground.jpg"); // Load Background
+  background(bg); // Display Background image
   
   // Audio Files
   minim = new Minim(this); // Initialize new minim
@@ -25,7 +28,7 @@ void setup(){
 }
 
 void draw(){
-  background(0);
+  background(bg); // Display Background Image
   for (Wall w: walls){
     w.render(); // Draw walls
   }

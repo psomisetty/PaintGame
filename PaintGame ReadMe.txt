@@ -19,5 +19,10 @@ Things that are not yet complete in my project: Also I want to try to allow colo
 	Also, I want to add in the ability to hold down shift for having a
 	varying velocity depending on how long shift is held for.
 
+How my project will help me in my potential career 5 years from now:
+	Knowing how to use and maniuplate audio is useful for making games with battle sequences that have a beginning
+	audio portion and a loopable portion. Also, using and manipulating images is useful as games with good art
+	typically do better with audiences than games with terrible art.
+
 Credits:
 Music File "IncompatibleType" Composed and Created by Greg Mcleod of McLeodGaming Inc.
