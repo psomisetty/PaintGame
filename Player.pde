@@ -8,6 +8,7 @@ class Player{
   float mass;
   boolean can_jump;
   ArrayList<Paint> paintblobs;
+  Boolean[] motions;
   
   Player(float x, float y, float _lx_bound, float _rx_bound, float _by_bound){
     /*
@@ -24,12 +25,17 @@ class Player{
     angle = -90; // Starting angle, straight up
     mass = 1;
     can_jump = true;
+    motions = new Boolean[4];
+    for (int i = 0; i < 4; i++){
+      motions[i] = false;
+    }
   }
   
   void run(ArrayList<Wall> walls, PVector gravity, PVector Force){
     drawangle(); // Draws the trajectory line
     drawchar(); // Draws the Character
     keyinter(); // Interprets keypress
+    motions(); // Does the motions
     in_bound(); // Checks if object in bound
     for (Paint p: paintblobs){
       p.run(walls, gravity, Force); // Runs the paint blobs
@@ -56,24 +62,47 @@ class Player{
     velocity.y = -20;
   }
 
+  void motions(){
+    if (motions[0]){
+      //Moves the location of the character to the left
+      location.x -= 2;
+    }
+    if (motions[1]){
+      //Moves the location of the character to the right
+      location.x += 2;
+    }
+    if (motions[2]){
+      if (angle >= -180){
+        //Decrements angle of trajectory line by 1
+        angle -= 1;
+      }
+    }
+    if (motions[3]){
+      if (angle <= 0){
+        //Incrememnts angle of trajectory line by 1
+        angle += 1;
+      }
+    }
+  }
+
   void keyinter(){
     if (keyPressed){
       if (key == CODED){
         if (keyCode == LEFT){
-          //Moves the location of the character to the left
-          location.x -= 2;
+          //Sets Moving Left to true
+          motions[0] = true;
         } else if (keyCode == RIGHT){
-          //Moves the location of the character to the right
-          location.x += 2;
+          //Sets Moving Right to true
+          motions[1] = true;
         } else if (keyCode == UP){
           if (angle >= -180){
-            //Decrements angle of trajectory line by 1
-            angle -= 1;
+            //Sets Decrement Angle to true
+            motions[2] = true;
           }
         } else if (keyCode == DOWN){
           if (angle <= 0){
-            //Incrememnts angle of trajectory line by 1
-            angle += 1;
+            //Sets Increment Angle to true
+            motions[3] = true;
           }
         }
       } else if (key == 'c' || key == 'C'){

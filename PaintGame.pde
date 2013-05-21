@@ -47,6 +47,23 @@ void keyReleased(){
       color c = color(int(random(255)),int(random(255)),int(random(255)));
       p.paintblobs.add(new Paint(p.location.x, p.location.y - 50, c, p.angle, 1, v_mult)); // Create paint at Player Object
     }
+    if (keyCode == LEFT){
+      //Sets Moving Left to true
+      p.motions[0] = false;
+    }
+    if (keyCode == RIGHT){
+      //Sets Moving Right to true
+      p.motions[1] = false;
+    }
+    if (keyCode == UP){
+      //Sets Decrement Angle to true
+      p.motions[2] = false;
+    }
+    if (keyCode == DOWN){
+      //Sets Increment Angle to true
+      p.motions[3] = false;
+      
+    }
   }
 }
 
