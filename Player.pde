@@ -55,7 +55,7 @@ class Player{
   void jump(){
     velocity.y = -20;
   }
-  
+
   void keyinter(){
     if (keyPressed){
       if (key == CODED){

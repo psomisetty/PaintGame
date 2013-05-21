@@ -10,14 +10,14 @@ PImage bg;
 
 void setup(){
   size(600,600);
-  background(0);
-  p = new Player(width/2, height-30, 50, width-50, height-30);
+
+  // Variable Initialization
+  p = new Player(width/2, height-30, 50, width-50, height-30); // Creates Player
   walls = new ArrayList(); // Initialze ArrayList
-  walls.add(new FloorWall(0, height-30, width, 30, 0, color(255))); // Create Floor
-  walls.add(new CeilingWall(0, 0, width, 30, 0, color(255))); // Create Ceiling
-  walls.add(new SideWall(0, 0, 30, height, 0, color(255))); // Create Left Wall
-  walls.add(new SideWall(width-30, 0 , 30, height, 0, color(255))); // Create Right Wall
   gravity = new PVector(0,.5); // Set acceleration due to gravity
+  addwalls(); // Adds walls
+  
+  // Image Files
   bg = loadImage("PaparazziBackground.jpg"); // Load Background
   background(bg); // Display Background image
   
@@ -53,6 +53,13 @@ void keyReleased(){
 void stop(){
   player.close();
   minim.stop();
-  
+
   super.stop();
+}
+
+void addwalls(){
+  walls.add(new FloorWall(0, height-30, width, 30, 0, color(255))); // Create Floor
+  walls.add(new CeilingWall(0, 0, width, 30, 0, color(255))); // Create Ceiling
+  walls.add(new SideWall(0, 0, 30, height, 0, color(255))); // Create Left Wall
+  walls.add(new SideWall(width-30, 0 , 30, height, 0, color(255))); // Create Right Wall
 }
