@@ -70,6 +70,7 @@ class Paint extends Circle{
   
   void render_splatter(Wall w, float loc){
     // Creates Rectangle "Splatters" on wall
+    noStroke();
     if ( w instanceof SideWall ){
       location.x = loc;
       pushMatrix();

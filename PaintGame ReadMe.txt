@@ -1,30 +1,26 @@
 Program Author: Pavana K Somisetty 56833162
-Program Objective: Create a Game with an Arguement
 
-The TITLE of my project is Painter
 
-The TOPIC of my project is Paint-Throwing
+Dear Future Startup,
 
-My main point in my project is to show that throwing paint is not really
-	all that fun. But it can be, with MUSIC!
+Enclosed is a .zip archive of a game I've recently developed, titled Painter.  This project is based on Paint-throwing
 
-If this project could change the world, it would teach people that proper
-	painting with brushes and whatnot is much more rewarding than
-	simply throwing paint--further justifying traditional art
+and the main point of it is to show that throwing paint is not really all that fun. But it can be, with MUSIC!.
 
-I communicate my argument and story by the following elements through
-	Processing: using Paint objects to splatter against walls.
+The project is about a robot who loves to throw paint at walls and ceilings and floors, so he was given a room to do that which he loved!
 
-Things that are not yet complete in my project: Also I want to try to allow colors to mix if they overlap.
-	Also, I want to add in the ability to hold down shift for having a
-	varying velocity depending on how long shift is held for.
+My career goal is to eventually become a game developer or tools developer for gaming companies
 
-How my project will help me in my potential career 5 years from now:
-	Knowing how to use and maniuplate audio is useful for making games with battle sequences that have a beginning
-	audio portion and a loopable portion. Also, using and manipulating images is useful as games with good art
-	typically do better with audiences than games with terrible art.
+and this project highlights my experience in this field through the multi-class usage and animation aspects of the game.
+
+I look forward to working with you and making a strong contribution to your team.
+
+Sincerely,
+Pavana Somisetty
 
 Credits:
 Sprite Class written and distributed by Garnet Hertz
 Image File daxbotsheet.png distrubted by www.amon.co
 Music File "IncompatibleType" Composed and Created by Greg Mcleod of McLeodGaming Inc.
+
+PImage method getReversePImage http://uihacker.blogspot.com/2012/04/processing-flip-pimage-horizontally.html

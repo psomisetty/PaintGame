@@ -7,9 +7,11 @@ ArrayList<Wall> walls;
 PVector gravity;
 float v_mult;
 PImage bg;
+boolean playing;
 
 void setup(){
   size(600,600);
+  playing = false;
 
   // Variable Initialization
   p = new Player(width/2, height-30, 50, width-50, height-30); // Creates Player
@@ -28,6 +30,35 @@ void setup(){
 }
 
 void draw(){
+  if (playing == false){
+    titledraw();
+  } else {
+    playdraw();
+  }
+}
+
+void titledraw(){
+  background(bg);
+  pushMatrix();
+    translate(width/2,height/2);
+    fill(0);
+    rect(-50,-50,100,50);
+    
+    // Play Text
+    PFont f = createFont("Arial",40,true);
+    textFont(f);
+    fill(255);
+    textAlign(CENTER);
+    text("PLAY",0,0);
+  popMatrix();
+  if (mousePressed == true){
+    if (mouseX >= width/2 -50 && mouseX <= width/2 + 50 && mouseY >= height/2 - 50 && mouseY <= height/2){
+      playing = true;
+    }
+  }
+}
+
+void playdraw(){
   background(bg); // Display Background Image
   for (Wall w: walls){
     w.render(); // Draw walls

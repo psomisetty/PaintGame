@@ -13,6 +13,8 @@ class Player{
   int direction;
   int animationSpeed;
   int updateCount;
+  boolean moving;
+  int index;
   
   Player(float x, float y, float _lx_bound, float _rx_bound, float _by_bound){
     /*
@@ -33,13 +35,17 @@ class Player{
     for (int i = 0; i < 4; i++){
       motions[i] = false;
     } // Populate all motion to be false
-    sprite = new Sprite("daxbotsheet.png",4,4);
+    sprite = new Sprite("daxbotsheet_0.png",4,4);
     direction = 0; // Set direction to left 0, right 1
+    animationSpeed = 10;
+    updateCount = 0;
+    index = 0;
   }
   
   void run(ArrayList<Wall> walls, PVector gravity, PVector Force){
     drawangle(); // Draws the trajectory line
-    drawchar(); // Draws the Character
+//    drawchar(); // Draws the Character
+    drawsprite();
     keyinter(); // Interprets keypress
     motions(); // Does the motions
     in_bound(); // Checks if object in bound
@@ -59,10 +65,20 @@ class Player{
   void motions(){
     if (motions[0]){
       //Moves the location of the character to the left
+      updateCount++;
+      if (updateCount == animationSpeed){
+        updateCount = 0;
+        index++;
+      }
       location.x -= 2;
     }
     if (motions[1]){
       //Moves the location of the character to the right
+      updateCount++;
+      if (updateCount == animationSpeed){
+        updateCount = 0;
+        index++;
+      }
       location.x += 2;
     }
     if (motions[2]){
@@ -77,6 +93,9 @@ class Player{
         angle += 1;
       }
     }
+    if (index == sprite.cols){
+      index = 0;
+    }
   }
 
   void keyinter(){
@@ -85,10 +104,12 @@ class Player{
         if (keyCode == LEFT){
           //Sets Moving Left to true
           direction = 0; // Sets Direction to left
+          moving = true;
           motions[0] = true;
         } else if (keyCode == RIGHT){
           //Sets Moving Right to true
           direction = 1; // Sets Direction to Right
+          moving = true;
           motions[1] = true;
         } else if (keyCode == UP){
           if (angle >= -180){
@@ -135,6 +156,27 @@ class Player{
     location.add(velocity);
   }
   
+  void drawsprite(){
+    pushMatrix();
+      translate(location.x-sprite.spriteWidth/2,location.y-sprite.spriteHeight);
+      if (direction == 0){
+        image(getReversePImage(sprite.spriteAnimationArray[index]),0,0);
+      } else if (direction == 1){
+        image(sprite.spriteAnimationArray[index],0,0);
+      }
+    popMatrix();
+  }
+
+  PImage getReversePImage( PImage myimage ){
+    PImage reverse = new PImage( myimage.width, myimage.height );
+    for( int i=0; i < myimage.width; i++ ){
+      for(int j=0; j < myimage.height; j++){
+        reverse.set( myimage.width - 1 - i, j, myimage.get(i, j) );
+      }
+    }
+    return reverse;
+  }
+
   void drawchar(){
     //Draws the character by translating the grid to the location and rotating it 180 degrees
     pushMatrix();
@@ -147,6 +189,7 @@ class Player{
   }
   
   void drawangle(){
+    // Draws the Trajectory line
     pushMatrix();
       translate(location.x,location.y - 50); // Move to location
       rotate(radians(angle)); // Rotate to angle
