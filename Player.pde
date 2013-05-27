@@ -9,6 +9,10 @@ class Player{
   boolean can_jump;
   ArrayList<Paint> paintblobs;
   Boolean[] motions;
+  Sprite sprite;
+  int direction;
+  int animationSpeed;
+  int updateCount;
   
   Player(float x, float y, float _lx_bound, float _rx_bound, float _by_bound){
     /*
@@ -28,7 +32,9 @@ class Player{
     motions = new Boolean[4];
     for (int i = 0; i < 4; i++){
       motions[i] = false;
-    }
+    } // Populate all motion to be false
+    sprite = new Sprite("daxbotsheet.png",4,4);
+    direction = 0; // Set direction to left 0, right 1
   }
   
   void run(ArrayList<Wall> walls, PVector gravity, PVector Force){
@@ -43,19 +49,7 @@ class Player{
     if(can_jump == false){
       applyAcceleration(new PVector(0,1.5));
       applyVelocity();
-      
     }
-  }
-  
-  void drawchar(){
-    //Draws the character by translating the grid to the location and rotating it 180 degrees
-    pushMatrix();
-      translate(location.x,location.y); // Move to location
-      noStroke();
-      rotate(PI); // Rotate 180 degrees
-      fill(128); // Set Gray
-      rect(-10,0,20,50); // Centers and creates rectangle "Upside Down"
-    popMatrix();
   }
   
   void jump(){
@@ -90,9 +84,11 @@ class Player{
       if (key == CODED){
         if (keyCode == LEFT){
           //Sets Moving Left to true
+          direction = 0; // Sets Direction to left
           motions[0] = true;
         } else if (keyCode == RIGHT){
           //Sets Moving Right to true
+          direction = 1; // Sets Direction to Right
           motions[1] = true;
         } else if (keyCode == UP){
           if (angle >= -180){
@@ -137,6 +133,17 @@ class Player{
   
   void applyVelocity(){
     location.add(velocity);
+  }
+  
+  void drawchar(){
+    //Draws the character by translating the grid to the location and rotating it 180 degrees
+    pushMatrix();
+      translate(location.x,location.y); // Move to location
+      noStroke();
+      rotate(PI); // Rotate 180 degrees
+      fill(128); // Set Gray
+      rect(-10,0,20,50); // Centers and creates rectangle "Upside Down"
+    popMatrix();
   }
   
   void drawangle(){

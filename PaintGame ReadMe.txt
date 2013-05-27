@@ -25,4 +25,6 @@ How my project will help me in my potential career 5 years from now:
 	typically do better with audiences than games with terrible art.
 
 Credits:
+Sprite Class written and distributed by Garnet Hertz
+Image File daxbotsheet.png distrubted by www.amon.co
 Music File "IncompatibleType" Composed and Created by Greg Mcleod of McLeodGaming Inc.
